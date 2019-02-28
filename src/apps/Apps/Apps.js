@@ -22,7 +22,6 @@ class Apps extends React.Component {
   static propTypes = {
     onMessage: PropTypes.func.isRequired,
   }
-
   handleMenuPanelOpen = () => {
     this.props.onMessage({
       data: { from: 'app', name: 'menuPanel', value: true },

@@ -12,54 +12,52 @@ const AppLayout = ({
   largeViewPadding,
   onMenuOpen,
   mainButton,
-}) => {
-  return (
-    <Viewport>
-      {({ below }) => (
-        <AppView
-          padding={below('medium') ? smallViewPadding : largeViewPadding}
-          appBar={
-            <AppBar>
-              <AppBarContainer
-                style={{ padding: below('medium') ? '0' : '0 30px' }}
-              >
-                <Title>
-                  {below('medium') && (
-                    <MenuButton onClick={onMenuOpen} label="Menu" />
-                  )}
-                  <TitleLabel>{title}</TitleLabel>
-                  {afterTitle}
-                </Title>
-                {mainButton &&
-                  (mainButton.button ||
-                    (below('medium') ? (
-                      <ButtonIcon
-                        onClick={mainButton.onClick}
-                        title={mainButton.label}
-                        css={`
-                          width: auto;
-                          height: 100%;
-                          padding: 0 20px 0 10px;
-                          margin-left: 8px;
-                        `}
-                      >
-                        {mainButton.icon}
-                      </ButtonIcon>
-                    ) : (
-                      <Button mode="strong" onClick={mainButton.onClick}>
-                        {mainButton.label}
-                      </Button>
-                    )))}
-              </AppBarContainer>
-            </AppBar>
-          }
-        >
-          {children}
-        </AppView>
-      )}
-    </Viewport>
-  )
-}
+}) => (
+  <Viewport>
+    {({ below }) => (
+      <AppView
+        padding={below('medium') ? smallViewPadding : largeViewPadding}
+        appBar={
+          <AppBar>
+            <AppBarContainer
+              style={{ padding: below('medium') ? '0' : '0 30px' }}
+            >
+              <Title>
+                {below('medium') && (
+                  <MenuButton onClick={onMenuOpen} label="Menu" />
+                )}
+                <TitleLabel>{title}</TitleLabel>
+                {afterTitle}
+              </Title>
+              {mainButton &&
+                (mainButton.button ||
+                  (below('medium') ? (
+                    <ButtonIcon
+                      onClick={mainButton.onClick}
+                      title={mainButton.label}
+                      css={`
+                        width: auto;
+                        height: 100%;
+                        padding: 0 20px 0 10px;
+                        margin-left: 8px;
+                      `}
+                    >
+                      {mainButton.icon}
+                    </ButtonIcon>
+                  ) : (
+                    <Button mode="strong" onClick={mainButton.onClick}>
+                      {mainButton.label}
+                    </Button>
+                  )))}
+            </AppBarContainer>
+          </AppBar>
+        }
+      >
+        {children}
+      </AppView>
+    )}
+  </Viewport>
+)
 
 AppLayout.defaultProps = {
   smallViewPadding: 20,
