@@ -1,10 +1,7 @@
-import { web3Providers } from './environment'
-
 // Enable the web3 provider. There is no way to reliably know the enabled
 // state of a provider, so we assume that if there is a provider but no
 // account, the provider is locked and / or not enabled.
-export function enableWallet() {
-  const provider = web3Providers.wallet
+export function enableWallet(provider) {
   if (!provider) {
     return
   }

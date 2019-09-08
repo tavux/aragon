@@ -9,6 +9,7 @@ import {
 import { getNetworkConfig } from './network-config'
 import { noop } from './utils'
 import { toWei, getInjectedProvider } from './web3-utils'
+import Torus from '@toruslabs/torus-embed'
 
 const appsOrder = ['TokenManager', 'Voting', 'Finance', 'Vault', 'Agent']
 const networkType = getEthNetworkType()
@@ -135,7 +136,7 @@ export const defaultEthNode =
 export const web3Providers = {
   default: new Web3.providers.WebsocketProvider(defaultEthNode),
   // Only use eth-provider to connect to frame if no injected provider is detected
-  wallet: getInjectedProvider() || provider(['frame']),
+  wallet: getInjectedProvider(),
 }
 
 export const defaultGasPriceFn =

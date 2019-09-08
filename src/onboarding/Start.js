@@ -93,7 +93,7 @@ class Start extends React.Component {
               )}
               <StartContent
                 onCreate={onCreate}
-                hasWallet={isConnected(web3Providers.wallet)}
+                hasWallet={isConnected(web3Providers.wallet || this.props.torus)}
                 hasAccount={hasAccount}
                 walletNetwork={walletNetwork}
                 walletProviderId={walletProviderId}

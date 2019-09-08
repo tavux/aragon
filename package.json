@@ -29,6 +29,7 @@
     "@aragon/wrapper": "^5.0.0-rc.16",
     "@babel/polyfill": "^7.0.0",
     "@sentry/browser": "^5.5.0",
+    "@toruslabs/torus-embed": "0.0.28",
     "@ungap/event-target": "^0.1.0",
     "date-fns": "2.0.0-alpha.22",
     "eth-provider": "^0.2.0",

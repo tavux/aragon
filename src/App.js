@@ -83,8 +83,10 @@ class App extends React.Component {
     transactionBag: null,
     signatureBag: null,
     walletNetwork: '',
-    walletProviderId: identifyProvider(web3Providers.wallet),
-    walletWeb3: getWeb3(web3Providers.wallet),
+    walletProviderId: identifyProvider(
+      web3Providers.wallet || this.props.torus
+    ),
+    walletWeb3: getWeb3(web3Providers.wallet || this.props.torus),
     web3: getWeb3(web3Providers.default),
     wrapper: null,
   }
@@ -96,7 +98,7 @@ class App extends React.Component {
     this.handleHistoryChange({ pathname, search })
     this.history.listen(this.handleHistoryChange)
 
-    pollMainAccount(web3Providers.wallet, {
+    pollMainAccount(web3Providers.wallet || this.props.torus, {
       onAccount: (account = null) => {
         this.setState({ account })
         if (account && this.state.wrapper) {
@@ -108,7 +110,7 @@ class App extends React.Component {
       },
     })
 
-    pollNetwork(web3Providers.wallet, walletNetwork => {
+    pollNetwork(web3Providers.wallet || this.props.torus, walletNetwork => {
       this.setState({ walletNetwork })
     })
 
@@ -164,7 +166,7 @@ class App extends React.Component {
 
   async updateDaoBuilder() {
     const daoBuilder = initDaoBuilder(
-      web3Providers.wallet,
+      web3Providers.wallet || this.props.torus,
       contractAddresses.ensRegistry
     )
     this.setState({
@@ -228,7 +230,7 @@ class App extends React.Component {
     log('Init DAO', dao)
     initWrapper(dao, contractAddresses.ensRegistry, {
       provider: web3Providers.default,
-      walletProvider: web3Providers.wallet,
+      walletProvider: web3Providers.wallet || this.props.torus,
       onDaoAddress: ({ address, domain }) => {
         log('dao address', address)
         log('dao domain', domain)
@@ -440,7 +442,9 @@ class App extends React.Component {
                         historyPush={this.historyPush}
                         locator={locator}
                         onRequestAppsReload={this.handleRequestAppsReload}
-                        onRequestEnable={enableWallet}
+                        onRequestEnable={() =>
+                          enableWallet(web3Providers.wallet || this.props.torus)
+                        }
                         permissionsLoading={permissionsLoading}
                         repos={repos}
                         signatureBag={signatureBag}
@@ -465,11 +469,14 @@ class App extends React.Component {
                       onBuildDao={this.handleBuildDao}
                       onComplete={this.handleCompleteOnboarding}
                       onOpenOrganization={this.handleOpenOrganization}
-                      onRequestEnable={enableWallet}
+                      onRequestEnable={() =>
+                        enableWallet(web3Providers.wallet || this.props.torus)
+                      }
                       onResetDaoBuilder={this.handleResetDaoBuilder}
                       selectorNetworks={selectorNetworks}
                       walletNetwork={walletNetwork}
                       walletProviderId={walletProviderId}
+                      torus={this.props.torus}
                     />
                   </div>
 

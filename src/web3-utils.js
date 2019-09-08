@@ -145,9 +145,13 @@ export function identifyProvider(provider) {
   if (provider && isElectron()) {
     return 'frame'
   }
+  if (provider && provider.isTorus) {
+    return 'torus'
+  }
   if (provider && provider.isMetaMask) {
     return 'metamask'
   }
+
   return 'unknown'
 }
 

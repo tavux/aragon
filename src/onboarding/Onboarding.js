@@ -498,6 +498,7 @@ class Onboarding extends React.PureComponent {
           onRequestEnable={onRequestEnable}
           walletNetwork={walletNetwork}
           walletProviderId={walletProviderId}
+          torus={this.props.torus}
           {...sharedProps}
         />
       )

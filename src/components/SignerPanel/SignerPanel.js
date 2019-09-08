@@ -346,7 +346,7 @@ class SignerPanel extends React.PureComponent {
                           intent={intent}
                           isTransaction={isTransaction}
                           hasAccount={Boolean(account)}
-                          hasWeb3={Boolean(getInjectedProvider())}
+                          hasWeb3={true}
                           networkType={network.type}
                           onClose={this.handleSignerClose}
                           onRequestEnable={onRequestEnable}

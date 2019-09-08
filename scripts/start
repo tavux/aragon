@@ -5,7 +5,7 @@ const execute = require('child_process').execSync
 
 const clientPort = process.env.REACT_APP_PORT || 3000
 
-execute(`copy-aragon-ui-assets -n aragon-ui ./build`, {
+execute(`npx copy-aragon-ui-assets -n aragon-ui ./build`, {
   stdio: 'inherit',
 })
 

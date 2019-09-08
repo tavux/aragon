@@ -3,6 +3,7 @@ import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Main } from '@aragon/ui'
+import Torus from '@toruslabs/torus-embed'
 import GlobalErrorHandler from './GlobalErrorHandler'
 import App from './App'
 
@@ -35,11 +36,21 @@ if (
   }
 }
 
-ReactDOM.render(
-  <GlobalErrorHandler>
-    <Main layout={false} scrollView={false}>
-      <App />
-    </Main>
-  </GlobalErrorHandler>,
-  document.getElementById('root')
-)
+const torusProvider = async () => {
+  const torus = new Torus()
+
+  await torus.init()
+
+  return torus.provider
+}
+
+torusProvider().then(torusProvider => {
+  ReactDOM.render(
+    <GlobalErrorHandler>
+      <Main layout={false} scrollView={false}>
+        <App torus={torusProvider} />
+      </Main>
+    </GlobalErrorHandler>,
+    document.getElementById('root')
+  )
+})
