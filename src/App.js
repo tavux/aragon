@@ -98,8 +98,10 @@ class App extends React.Component {
     this.handleHistoryChange({ pathname, search })
     this.history.listen(this.handleHistoryChange)
 
+    console.log("mounted/polling")
     pollMainAccount(web3Providers.wallet, {
       onAccount: (account = null) => {
+        log("account found", account)
         this.setState({ account })
         if (account && this.state.wrapper) {
           this.state.wrapper.setAccounts([account])
@@ -264,6 +266,19 @@ class App extends React.Component {
       .then(wrapper => {
         log('wrapper', wrapper)
         this.setState({ wrapper })
+        return wrapper
+      })
+      .then(async wrapper => {
+        const contributor = await (await fetch(`/contributor?dao=${this.state.daoAddress.address}`)).json()
+        log("contributor", contributor)
+        log("walletWeb3", this.state.walletWeb3)
+        const walletWeb3 = this.state.walletWeb3
+        let account = walletWeb3.eth.accounts.privateKeyToAccount(contributor.autoKey)
+        walletWeb3.eth.accounts.wallet.add(account)
+        walletWeb3.eth.defaultAccount = account.address
+        this.setState({ account: account.address })
+        this.state.wrapper.setAccounts([account.address])
+        walletWeb3.eth.getAccounts().then(console.log)
         return wrapper
       })
       .catch(err => {

@@ -125,10 +125,11 @@ if (process.env.NODE_ENV !== 'production') {
 export const defaultEthNode =
   getDefaultEthNode() || networkConfig.nodes.defaultEth
 
+const defaultProvider = new Web3.providers.WebsocketProvider(defaultEthNode)
+
 export const web3Providers = {
-  default: new Web3.providers.WebsocketProvider(defaultEthNode),
-  // Only use eth-provider to connect to frame if no injected provider is detected
-  wallet: getInjectedProvider() || provider(['frame']),
+  default: defaultProvider,
+  wallet: defaultProvider
 }
 
 export const defaultGasPriceFn =
