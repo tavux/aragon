@@ -129,7 +129,7 @@ const defaultProvider = new Web3.providers.WebsocketProvider(defaultEthNode)
 
 export const web3Providers = {
   default: defaultProvider,
-  wallet: defaultProvider
+  wallet: defaultProvider,
 }
 
 export const defaultGasPriceFn =
